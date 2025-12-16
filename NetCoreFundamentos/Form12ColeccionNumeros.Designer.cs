@@ -48,6 +48,7 @@
             btnMostrar.TabIndex = 28;
             btnMostrar.Text = "Mostrar datos";
             btnMostrar.UseVisualStyleBackColor = true;
+            btnMostrar.Click += btnMostrar_Click;
             // 
             // btnGenerar
             // 
@@ -57,6 +58,7 @@
             btnGenerar.TabIndex = 23;
             btnGenerar.Text = "Generar";
             btnGenerar.UseVisualStyleBackColor = true;
+            btnGenerar.Click += btnGenerar_Click;
             // 
             // lstNumeros
             // 
