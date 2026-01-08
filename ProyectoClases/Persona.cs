@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace ProyectoClases
@@ -15,9 +16,13 @@ namespace ProyectoClases
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public Paises Pais { get; set; }
+        public Direccion Domicilio { get; set; }
+        public Direccion Vacaciones { get; set; }
 
         private int _Edad;
         private Generos _Genero;
+        private string _Descripcion;
+
         #endregion
 
         #region PROPS
@@ -51,24 +56,51 @@ namespace ProyectoClases
             { 
                 foreach (Generos genero in Enum.GetValues(typeof(Generos)))
                 {
-                    if (value == genero)
-                    {
-                        _Genero = value;
-                    }
-                    else
-                    {
-                        throw new Exception("Género no válido");
-                    }
+                    _Genero = value;
+
+                    //if (value == genero)
+                    //{
+                    //    _Genero = value;
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("Género no válido");
+                    //}
                 }
+            }
+        }
+
+        public string this[int index]
+        {
+            get 
+            { 
+                return _Descripcion; 
+            }
+            set 
+            {
+                Random generador = new Random();
+                int aleatorio = generador.Next(1, 20);
+                this._Descripcion = "Descripcion" + aleatorio;
             }
         }
 
         #endregion
 
+        #region CONSTRUCTOR
         public Persona()
         {
-            
+            Debug.WriteLine("Constructor Persona vacio");
         }
+
+        public Persona(string nombre, string apellido)
+        {
+            this.Nombre = nombre;
+            this.Apellido = apellido;
+
+            Debug.WriteLine("Constructor Persona con 2 param");
+        }
+
+        #endregion
 
         #region METODOS
         public string GetNombreCompleto()
