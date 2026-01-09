@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProyectoClases.Models
 {
-    public class ColeccionMascotas
+    public class ColeccionMascotas :List<Mascota>
     {
 
     }
