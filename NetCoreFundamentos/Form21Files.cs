@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using ProyectoClases.Helpers;
 
 namespace NetCoreFundamentos
 {
     public partial class Form21Files : Form
     {
         public string Ruta { get; set; }
+        HelperFiles helper;
 
         public Form21Files()
         {
@@ -23,6 +25,7 @@ namespace NetCoreFundamentos
             //2) Utilizar @ antes del string y fuera del string
                 //Ruta = @"C:\Carpeta\1.txt";
             Ruta = "file1.txt";
+            helper = new HelperFiles();
         }
 
         private void btnNuevoNombre_Click(object sender, EventArgs e)
@@ -34,32 +37,15 @@ namespace NetCoreFundamentos
 
         private async void btnLeer_Click(object sender, EventArgs e)
         {
-            FileInfo file = new FileInfo(Ruta);
-            using (TextReader reader = file.OpenText())
-            {
-                string content = await reader.ReadToEndAsync();
-                reader.Close();
-                this.txtContenidoFile.Text = content;
-            }
+            string content = await helper.ReadFileAsync(Ruta);
+            this.txtContenidoFile.Text = content;
         }
 
         private async void btnWrite_Click(object sender, EventArgs e)
         {
-            //tenemos una clase llamada FileInfo que nos devuelve un file
-            //y podemos generar un writer/reader
-            FileInfo file = new FileInfo(Ruta);
-            //creamos el fichero
-            using (TextWriter writer = file.CreateText())
-            {
-                string content = GetNombresListBox();
-                //escribimos en el fichero
-                await writer.WriteAsync(content);
-                //despues de escribir debemos liberar la memoria
-                await writer.FlushAsync();
-                //cerramos el fichero
-                writer.Close();
-                MessageBox.Show("Fichero terminado");
-            }
+            string content = GetNombresListBox();
+            await helper.WriteFileAsync(Ruta, content);
+            MessageBox.Show("Fichero escrito");
         }
 
         public string GetNombresListBox()
