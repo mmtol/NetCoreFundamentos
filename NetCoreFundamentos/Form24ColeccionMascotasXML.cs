@@ -26,9 +26,9 @@ namespace NetCoreFundamentos
         private void DibujarMascotas()
         {
             lstMascotas.Items.Clear();
-            foreach(Mascota mascota in mascotas)
+            foreach (Mascota mascota in mascotas)
             {
-                lstMascotas.Items.Add(mascota.Nombre+", "+mascota.Raza);
+                lstMascotas.Items.Add(mascota.Nombre + ", " + mascota.Raza);
             }
         }
 
@@ -69,6 +69,15 @@ namespace NetCoreFundamentos
                 lstMascotas.Items.Clear();
                 mascotas.Clear();
             }
+        }
+
+        private void btnExaminar_Click(object sender, EventArgs e)
+        {
+            //abrir el openfile para seleccionar la img
+            openFileDialog1.ShowDialog();
+            string ruta = openFileDialog1.FileName;
+            //dibujamos la img en el form
+            pictureBox1.Image = Image.FromFile(ruta);
         }
     }
 }
